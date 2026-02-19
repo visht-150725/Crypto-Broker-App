@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
@@ -12,7 +11,6 @@
     "clean": "rm -rf dist",
     "type-check": "tsc --noEmit"
   },
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/visht-150725/Crypto-Broker-App.git"
@@ -28,7 +26,11 @@
   "devDependencies": {
     "@types/node": "^25.3.0",
     "nodemon": "^3.1.11",
+    "prisma": "^7.4.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@prisma/client": "^7.4.0"
   }
 }

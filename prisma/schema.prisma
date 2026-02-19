@@ -1,0 +1,74 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        BigInt   @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+
+  wallet    Wallet?
+  orders    Order[]
+  trades    Trade[]
+  holdings  Holding[]
+}
+
+model Wallet {
+  userId  BigInt  @id
+  balance Decimal @default(1000000)
+
+  user    User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Asset {
+  symbol String @id
+  base   String
+  quote  String
+
+  orders Order[]
+}
+
+model Order {
+  id        BigInt   @id @default(autoincrement())
+  userId    BigInt
+  symbol    String
+  side      Int
+  type      Int
+  price     Decimal?
+  quantity  Decimal
+  status    Int
+  createdAt DateTime @default(now())
+  filledAt  DateTime?
+
+  user   User  @relation(fields: [userId], references: [id])
+  asset  Asset @relation(fields: [symbol], references: [symbol])
+}
+
+model Trade {
+  id         BigInt   @id @default(autoincrement())
+  userId     BigInt
+  symbol     String
+  side       Int
+  price      Decimal
+  quantity   Decimal
+  executedAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Holding {
+  userId   BigInt
+  symbol   String
+  quantity Decimal @default(0)
+  avgPrice Decimal @default(0)
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@id([userId, symbol])
+}
