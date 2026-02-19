@@ -1,0 +1,34 @@
+{
+  "name": "broker-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "nodemon src/index.ts",
+    "watch": "tsc --watch",
+    "clean": "rm -rf dist",
+    "type-check": "tsc --noEmit"
+  },
+
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/visht-150725/Crypto-Broker-App.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/visht-150725/Crypto-Broker-App/issues"
+  },
+  "homepage": "https://github.com/visht-150725/Crypto-Broker-App#readme",
+  "devDependencies": {
+    "@types/node": "^25.3.0",
+    "nodemon": "^3.1.11",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
