@@ -1,42 +1,40 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
-  id        BigInt   @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   email     String   @unique
   password  String
   createdAt DateTime @default(now())
 
-  wallet    Wallet?
-  orders    Order[]
-  trades    Trade[]
-  holdings  Holding[]
+  wallet   Wallet?
+  orders   Order[]
+  trades   Trade[]
+  holdings Holding[]
 }
 
 model Wallet {
-  userId  BigInt  @id
+  userId  Int     @id
   balance Decimal @default(1000000)
-
-  user    User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Asset {
-  symbol String @id
+  symbol String   @id
   base   String
   quote  String
-
   orders Order[]
 }
 
 model Order {
   id        BigInt   @id @default(autoincrement())
-  userId    BigInt
+  userId    Int
   symbol    String
   side      Int
   type      Int
@@ -46,13 +44,13 @@ model Order {
   createdAt DateTime @default(now())
   filledAt  DateTime?
 
-  user   User  @relation(fields: [userId], references: [id])
-  asset  Asset @relation(fields: [symbol], references: [symbol])
+  user  User  @relation(fields: [userId], references: [id])
+  asset Asset @relation(fields: [symbol], references: [symbol])
 }
 
 model Trade {
   id         BigInt   @id @default(autoincrement())
-  userId     BigInt
+  userId     Int
   symbol     String
   side       Int
   price      Decimal
@@ -63,7 +61,7 @@ model Trade {
 }
 
 model Holding {
-  userId   BigInt
+  userId   Int
   symbol   String
   quantity Decimal @default(0)
   avgPrice Decimal @default(0)
