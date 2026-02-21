@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { prisma } from "../config/prisma";
 
-export const getProfgile = async (req: Request, res: Response) => {
+export const getProfile = async (req: Request, res: Response) => {
   try {
     const idParam = req.params.userId;
 

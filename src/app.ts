@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 
 import userRoutes from "./routes/user.routes";
-//import orderRoutes from "./routes/order.routes";
+import orderRoutes from "./routes/order.routes";
 import profileRoutes from "./routes/profile.routes";
 //import portfolioRoutes from "./routes/portfolio.routes";
 
@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
 
 // Routes
 app.use("/user", userRoutes);
-//app.use("/orders", orderRoutes);
+app.use("/orders", orderRoutes);
 app.use("/profile", profileRoutes);
 //app.use("/portfolio", portfolioRoutes);
 
